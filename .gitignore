@@ -1,0 +1,22 @@
+# Repository-level ignores (minimal)
+# Secrets / environment
+.env
+.env.*
+
+# Logs
+*.log
+logs/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage / test caches
+.coverage
+.pytest_cache/
+
+# Per-folder build and language-specific ignores are defined in each subfolder

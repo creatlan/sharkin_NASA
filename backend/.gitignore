@@ -1,0 +1,36 @@
+# Backend (Python / microservice)
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Virtualenv artifacts
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Local secrets
+.env
+.env.*
+service-account.json
+GEE_PRIVATE_KEY_PATH
+GEE_SERVICE_ACCOUNT
+
+# Logs
+*.log
+logs/
+
+# Coverage
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
