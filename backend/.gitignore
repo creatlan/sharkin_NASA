@@ -20,6 +20,8 @@ service-account.json
 GEE_PRIVATE_KEY_PATH
 GEE_SERVICE_ACCOUNT
 
+node_modules
+
 # Logs
 *.log
 logs/
