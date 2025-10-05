@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+:root{
+  --primary: #032D68;
+  --bg: #FCFCFA;
+  --text: #032D68;
+  --container-width: 1200px;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+.container{
+  max-width:var(--container-width);
+  margin:0 auto;
+  padding:24px;
+}
+/* Header */
+.site-header{
+  background:var(--primary);
+  color:#fff;
+  padding:14px 24px;
+  position: relative; /* allow absolute positioning of brand and right nav */
+}
+.site-header .nav{
+  display:flex;align-items:center;justify-content:center;
+  max-width:var(--container-width);margin:0 auto;position:relative;
+}
+.site-header .brand{font-family:'Archivo Black', sans-serif;font-size:28px;letter-spacing:1px;position:absolute;left:24px;top:50%;transform:translateY(-50%)}
+.site-header .nav-right{display:flex;gap:28px;font-family:'Archivo Black', sans-serif;font-size:30px;position:absolute;right:24px;top:50%;transform:translateY(-50%)}
+
+/* Hero */
+.hero{padding:40px 24px 8px}
+.hero .title{font-family:'Archivo Black',sans-serif;font-size:186px;line-height:0.8;color:var(--primary);margin:0}
+.hero .divider{height:2px;background:#cbd6e0;margin:18px 0}
+.hero .subtitle{font-family:'Archivo Black',sans-serif;font-size:35px;line-height:1.2;text-align:center;color:var(--primary);margin:18px 0 0px}
+
+/* Two column intro */
+.intro{display:flex;gap:40px;padding:24px}
+.intro .left{flex:1}
+.intro .right{flex:1;padding:24px;border-left:2px solid #e6edf6}
+.intro .terms{font-family:monospace;font-size:15px;line-height:1.2;color:var(--primary)}
+.try-btn{display:inline-block;background:var(--primary);color:#fff;padding:18px 48px;border:none;font-family:'Archivo Black',sans-serif;font-size:30px}
+
+/* Map section full width */
+.map-section{padding:24px;border-top:2px solid #e6edf6}
+.params{max-width:var(--container-width);margin:12px auto;padding:12px}
+
+/* three columns */
+.three-cols{display:flex;border-top:2px solid #e6edf6;border-bottom:2px solid #e6edf6}
+.three-cols .col{flex:1;padding:48px;border-right:2px solid #e6edf6;text-align:center}
+.three-cols .col:last-child{border-right:none}
+.three-cols .col h3{font-family:'Archivo Black',sans-serif;color:var(--primary);font-size:18px}
+
+/* footer */
+.site-footer{padding:48px 24px;text-align:center}
+.site-footer h1{font-family:'Archivo Black',sans-serif;font-size:48px}
+.site-footer h3{font-size:40px;line-height:1.2}
+
+@media(max-width:900px){
+  .hero .title{font-size:72px}
+  .intro{flex-direction:column}
+  .three-cols{flex-direction:column}
+}
+
+/* About page */
+.about-hero{
+  background:var(--primary);
+  color:#fff;
+  padding:0px 100px;
+}
+.about-hero .about-text{
+  max-width:1100px;margin:0 auto;text-align:center;font-family:'Archivo Black',sans-serif;letter-spacing:1px
+}
+.about-content{
+  background:var(--primary);color:#fff;padding:40px 24px 120px;text-align:center;max-width:1000px;margin:0 auto;font-family:inherit
+}
+.about-h2{font-size:60px;line-height:120%;font-family:'Archivo Black',sans-serif;margin:18px 0}
+
+/* About blocks */
+.about-block{max-width:900px;padding:20px 28px;border-radius:10px}
+.about-paragraph{font-size:18px;line-height:1.6;margin:10px 0;color:#fff}
+
+/* Home gallery (cards) - minimal, scoped to match project theme */
+.shark-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:48px;padding:40px 0}
+.shark-card{background:linear-gradient(180deg, rgba(2,48,96,0.9), rgba(2,48,96,1));color:#fff;padding:36px;border:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;align-items:center}
+.shark-card .shark-img{width:340px;height:340px;border-radius:50%;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 0 rgba(0,0,0,0.15);}
+.shark-card .shark-img img{width:85%;height:85%;object-fit:contain;display:block}
+.shark-meta{max-width:520px;text-align:center;padding-top:28px;font-family:monospace}
+.item-num{font-size:12px;letter-spacing:2px;opacity:0.9}
+.shark-title{font-family:'Archivo Black',sans-serif;margin:6px 0 12px;font-size:16px}
+.shark-desc{font-size:13px;line-height:1.6}
+
+@media(max-width:900px){
+  .about-hero{padding:32px}
+  .about-h2{font-size:28px}
+  .about-paragraph{font-size:16px}
+  .shark-gallery{grid-template-columns:1fr;gap:28px}
+}

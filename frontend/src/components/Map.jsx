@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
-export default function Map({ geojson, onMapClick, center, bufferKm = 2, shapeType = 'circle' }) {
+export default function Map({ geojson, onMapClick, center, bufferKm = 2, shapeType = 'circle', containerId = 'map' }) {
   const mapRef = useRef(null)
   const layerRef = useRef(null)
   const markerRef = useRef(null)
@@ -10,7 +10,7 @@ export default function Map({ geojson, onMapClick, center, bufferKm = 2, shapeTy
 
   useEffect(() => {
     if (mapRef.current) return
-    const map = L.map('map', { center: [0, 0], zoom: 2 })
+    const map = L.map(containerId, { center: [0, 0], zoom: 2 })
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map)
@@ -25,25 +25,31 @@ export default function Map({ geojson, onMapClick, center, bufferKm = 2, shapeTy
       } else {
         markerRef.current = L.marker([lat, lng]).addTo(map)
       }
-      // try to call parent callback if provided
-      if (typeof map._container?.dataset?.onMapClick === 'string') {
-        // nothing; dataset used only for alternative wiring
-      }
       // dispatch a custom event with coords so React parent can hook in
       const ev = new CustomEvent('map-click', { detail: { lng, lat } })
       map.getContainer().dispatchEvent(ev)
     })
-  }, [])
+  }, [containerId])
 
   useEffect(() => {
     const map = mapRef.current
     if (!map) return
-    // Intentionally do not render GeoJSON area highlights anymore.
-    // Previously we added a polygon layer and auto-fit the map bounds.
-    // That behavior has been removed per UX request; leave marker and click handling intact.
+    // remove previous geo layer
     if (layerRef.current) {
       try { map.removeLayer(layerRef.current) } catch (e) {}
       layerRef.current = null
+    }
+
+    if (!geojson) return
+
+    try {
+      const geo = L.geoJSON(geojson, {
+        style: feature => ({ color: 'red', weight: 2, fillOpacity: 0.3 })
+      }).addTo(map)
+      layerRef.current = geo
+      try { map.fitBounds(geo.getBounds()) } catch (e) {}
+    } catch (e) {
+      console.error('Failed to render geojson on map', e)
     }
   }, [geojson])
 
@@ -89,5 +95,5 @@ export default function Map({ geojson, onMapClick, center, bufferKm = 2, shapeTy
     return () => el.removeEventListener('map-click', handler)
   }, [onMapClick])
 
-  return <div id="map"></div>
+  return <div id={containerId} style={{width:'100%', height:'100%'}}></div>
 }
